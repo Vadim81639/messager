@@ -1,0 +1,87 @@
+.custom-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  position: relative;
+  /* width: 386px; */
+}
+
+.custom-input--error .custom-input__field {
+  border: 1px solid #f9c4c2;
+  background: #fffbfb;
+}
+
+.custom-input--error .custom-input__error {
+  display: block;
+}
+
+.custom-input__field {
+  border: 1px solid #cdcfde;
+  font-family: inherit;
+  border-radius: 8px;
+  padding: 13px 44px  14px 16px; /*44 это безопасный паддинг, чтобы ввод пароля или логина не заходил под иконку*/
+  width: 100%;
+  color: #8f939f;
+
+font-size: 14px;
+line-height: 16px;
+color: #8f939f;
+}
+
+.custom-input__field:hover {
+  border: 1px solid #3356d7;
+}
+
+.custom-input__field:focus-visible {
+  border: 1px solid #3356d7;
+  outline: none;
+}
+
+.custom-input__field:hover~.custom-input__icon {
+  color: #3356D7;
+}
+
+.custom-input__label {
+  font-weight: inherit;
+  font-size: 14px;
+  line-height: 16px;
+  color: #8f939f;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 13px;
+  transform: translateY(-50%);
+  user-select: none;
+  padding: 1px 4px;
+}
+
+.custom-input__icon {
+  color: #8f939f;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+}
+
+/* .custom-input__icon для обновления {
+  color: #8f939f;
+  pointer-events: none;
+
+} */
+
+.custom-input__icon:hover {
+  color: #3356D7;
+}
+
+.custom-input__icon:focus-visible {
+  color: #3356D7;
+}
+
+.custom-input__error {
+  display: none;
+  font-size: 12px;
+  line-height: 14px;
+  background-color: #f6514b;
+  margin-top: 8px;
+}

@@ -1,0 +1,73 @@
+
+.custom-radio {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.custom-radio__label {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  user-select: none;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1e222e;
+  cursor: pointer;
+}
+
+.custom-radio__field {
+  margin: 0 10px 0 0;
+  width: 20px;
+  height: 20px;
+  color: #CDCFDE;
+}
+
+.custom-radio__field:checked {
+  background-color: #fff;
+}
+
+.custom-radio__field:hover {
+  color: #3356D7;
+  cursor: pointer;
+}
+
+.custom-radio__input:hover + .custom-radio__label::before {
+  border-color: #3356D7;
+}
+
+.custom-radio__field:focus-visible {
+  color: #A0B4FF;
+  outline: none;
+}
+
+.custom-radio__field:focus-visible + .custom-radio__label::after {
+  background-color: #fff;
+}
+
+.custom-radio__label:hover::after {
+  background-color: #fff;
+}
+
+.custom-radio__wrap {
+  display: flex;
+  /* border: 1px solid red; */
+}  
+
+.custom-radio__wrap--col {
+    flex-direction: column;
+    align-items: center;     /* Выравнивание по поперечной оси (горизонтали) */
+    gap: 5px;
+    /* border: 1px solid rgb(0, 17, 167); */
+}
+
+.custom-radio__wrap--row {
+    display: flex;
+    justify-content: space-around;  /* Распределит кнопки по краям */
+    gap: 20px;  /* Дополнительный отступ между кнопками */
+    width: 100%;  /* Чтобы space-between работал, нужна ширина */
+}
+
+.custom-radio__text {
+  margin-bottom: 15px;
+}

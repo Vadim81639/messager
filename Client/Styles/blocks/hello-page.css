@@ -1,0 +1,32 @@
+.wrapper-start,
+.wrapper-registration, 
+.wrapper-login,
+.wrapper-note {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid blue; */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.wrapper-grid {
+    display: grid;
+    width: 100%;
+    justify-content: center ;
+    /* border: 1px solid blue; */
+    grid-template-columns: auto;
+    /* grid-template-columns: 1fr 1fr; */
+}
+
+.wrapper-start,
+.wrapper-registration,
+/* .wrapper-login */
+.wrapper-note
+{
+    display: none;
+}
+
+
+
+

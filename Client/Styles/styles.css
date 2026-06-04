@@ -1,0 +1,12 @@
+@import "global/container.css";
+@import "global/fonts.css";
+@import "global/reboot.css";
+@import "global/visually-hidden.css";
+@import "normalize.css";
+@import "blocks/hello-page.css";
+@import "blocks/registration.css";
+@import "blocks/btn.css";
+@import "blocks/custom-checkbox.css";
+@import "blocks/custom-input.css";
+@import "blocks/custom-radio.css";
+@import "blocks/avatar-custom.css";
