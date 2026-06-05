@@ -1,7 +1,6 @@
 .custom-checkbox {
-  /* display: flex;
-  align-items: center; */
   position: relative;
+  margin-top: auto;
 }
 
 .custom-checkbox__field:checked + .custom-checkbox__label .custom-checkbox__icon {

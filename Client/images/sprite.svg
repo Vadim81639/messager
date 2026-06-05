@@ -164,4 +164,8 @@
       </clipPath>
     </defs>
   </symbol>
+  <symbol id="icon-close" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M43.7728 41.9114L5.77277 5.91136" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+    <path d="M5.77277 41.9114L43.7728 5.91136" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  </symbol>  
 </svg>

@@ -2,6 +2,7 @@
 @import "global/fonts.css";
 @import "global/reboot.css";
 @import "global/visually-hidden.css";
+@import "global/debug.css";
 @import "normalize.css";
 @import "blocks/hello-page.css";
 @import "blocks/registration.css";

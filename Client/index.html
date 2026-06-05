@@ -26,231 +26,239 @@
         </div>
       </div>
     </div>
-  </header>
-
+  </header>  
   <main>
     <section class="welcome-page">
       <h1 class="visually-hidden" aria-hidden="false">Регистрация&nbsp;&mdash; мессенджера</h1>
       <div class="container">
-        <div class="wrapper-grid">
-          <!-- стартовая карточка -->
-          <div class="wrapper-start">
+        <div class="debug">
+          <h2 class="debug__header no-user">DEBUG:</h2>
+          <p class="debug__message">-</p>
+        </div>
+        <!-- стартовая карточка -->
+        <div class="wrapper-owner no-user">
+          <div class="card wrapper-start">
             <form class="registration-form" action="#" method="POST">
               <h2 class="registration-form__name">Какой то крутой мессенджер</h2>
               <div class="registration-form__wrapper">
-                <img src="images/logo.svg" alt="" width="500">
+                <img class="no-user" src="images/logo.svg" alt="" width="500">
               </div>
-              <button class="registration-form__btn btn registration-form__btn--login" type="button">Вход</button>
-              <button class="registration-form__btn btn registration-form__btn--reg" type="button">Регистрация</button>
+              <div class="wrapper-container">
+                <button class="registration-form__btn btn registration-form__btn--login" type="button">Вход</button>
+                <button class="registration-form__btn btn registration-form__btn--reg"
+                  type="button">Регистрация</button>
+              </div>
             </form>
           </div>
 
           <!-- карта логина -->
-          <div class="wrapper-login">
-            <form class="registration-form " action="#" method="POST">
-              <h2 class="registration-form__name">Вход</h2>
-              <div class="registration-form__wrapper registration-form__wrapper--login">
-                <div class="registration-form__inner registration-form__inner--row">
-                  <div class="registration-form__wrapper">
-                    <img src="images/logo.svg" alt="" width="500">
-                  </div>
-                  <div class="custom-input">
-                    <input class="custom-input__field" type="text" name="login" id="login" required>
-                    <label class="custom-input__label" for="login">Логин</label>
-                  </div>
-
-                  <div class="custom-input">
-                    <input class="custom-input__field" type="password" name="password" id="password">
-                    <label class="custom-input__label" for="password">Пароль</label>
-                  </div>
-                </div>
-
-              </div>
-              <button class="registration-form__btn btn" type="submit">Войти</button>
-              <button class="btn__data-back" type="button">
-                <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
-                  <use xlink:href="images/sprite.svg#icon-back"></use>
-                </svg>
-              </button>
-            </form>
-          </div>
-
-          <!-- карта регистрации -->
-          <div class="wrapper-registration">
-            <form class="registration-form" action="#" method="POST">
-              <h2 class="registration-form__name">Регистрация</h2>
-              <div class="registration-form__wrapper">
-                <div class="registration-form__inner registration-form__inner--row">
-                  <div class="custom-input">
-                    <input class="custom-input__field" type="text" name="nik-name" id="nik-name" required>
-                    <label class="custom-input__label" for="nik-name">Ник</label>
-                  </div>
-
-                  <div class="custom-input">
-                    <input class="custom-input__field" type="text" name="login" id="login" required>
-                    <label class="custom-input__label" for="login">Логин</label>
-                  </div>
-
-                  <div class="custom-input">
-                    <input class="custom-input__field" type="password" name="password" id="password">
-                    <label class="custom-input__label" for="password">Пароль</label>
-                  </div>
-
-                </div>
-                <div class="custom-radio__wrap custom-radio__wrap--col">
-                  <p class="custom-radio__text">Укажите Ваш пол:</p>
-                  <div class="custom-radio__wrap custom-radio__wrap--row">
-                    <div class="custom-radio">
-                      <input class="custom-radio__field" type="radio" id="gender_male" name="gender">
-                      <label class="custom-radio__label" for="gender_male">
-                        Мужчина</label>
+          <div class="card wrapper-login">
+            <div class="card__double">
+              <form class="registration-form " action="#" method="POST">
+                <h2 class="registration-form__name">Вход</h2>
+                <div class="registration-form__wrapper registration-form__wrapper--login">
+                  <div class="registration-form__inner registration-form__inner--row">
+                    <div class="registration-form__wrapper">
+                      <img class="no-user" src="images/logo.svg" alt="" width="500">
                     </div>
-                    <div class="custom-radio">
-                      <input class="custom-radio__field" type="radio" id="gender_female" name="gender">
-                      <label class="custom-radio__label" for="gender_female">
-                        Женщина</label>
+                    <div class="custom-input">
+                      <input class="custom-input__field" type="text" name="login" id="login" required>
+                      <label class="custom-input__label" for="login">Логин</label>
+                    </div>
+                    <div class="custom-input">
+                      <input class="custom-input__field" type="password" name="password" id="password">
+                      <label class="custom-input__label" for="password">Пароль</label>
                     </div>
                   </div>
                 </div>
-                <div class="wrapper-avatar">
-                  <p class="wrapper-avatar__text">Аватар:</p>
-                  <div class="wrapper-avatar__inner">
-                    <div class="wrapper-avatar__content wrapper-avatar__content--btn">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="custom-checkbox">
-                <input class="custom-checkbox__field visually-hidden" type="checkbox" id="agree" name="agree">
-                <label class="custom-checkbox__label" for="agree">
-                  <span class="custom-checkbox__heading">Согласен на&nbsp;обработку и&nbsp;передачу
-                    <a class="custom-checkbox__label-link" href="#"> персональных данных</a>
-                  </span>
-                  <svg class="custom-checkbox__icon" width="12" height="12" aria-hidden="true">
-                    <use xlink:href="images/sprite.svg#icon-check"></use>
-                  </svg>
-                </label>
-              </div>
-              <button class="registration-form__btn btn" type="submit">Зарегистрироваться</button>
-              <button class="btn__data-back" type="button">
-                <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
-                  <use xlink:href="images/sprite.svg#icon-back"></use>
-                </svg>
-              </button>
-            </form>
-          </div>
-
-          <!-- карта описания -->
-          <div class="wrapper-note">
-            <div class="wrapper-note__registration">
-              <form class="registration-form" action="#" method="POST">
-                <h2 class="registration-form__name">Настройка аватарки</h2>
-
-                <!-- <div class="avatar-custom avatar-custom--background">
-                  <p class="avatar-custom__text">Фон</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div> -->
-
-                <!-- <div class="avatar-custom avatar-custom--dress">
-                  <p class="avatar-custom__text">Одежда</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div> -->
-
-                <div class="avatar-custom avatar-custom--ears">
-                  <p class="avatar-custom__text">Уши</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <div class="avatar-custom avatar-custom--skin">
-                  <p class="avatar-custom__text">Цвет кожи</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <div class="avatar-custom avatar-custom--chin">
-                  <p class="avatar-custom__text">Подбородок</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <div class="avatar-custom avatar-custom--mouth ">
-                  <p class="avatar-custom__text">Рот</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <!-- <div class="avatar-custom avatar-custom--mustache">
-                  <p class="avatar-custom__text">Усы</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <div class="avatar-custom avatar-custom--beard">
-                  <p class="avatar-custom__text">Борода</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div> -->
-
-                <div class="avatar-custom avatar-custom--eye">
-                  <p class="avatar-custom__text">Глаза</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <!-- <div class="avatar-custom avatar-custom--glasses">
-                  <p class="avatar-custom__text">Очки</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div> -->
-
-                <div class="avatar-custom avatar-custom--nose">
-                  <p class="avatar-custom__text">Нос</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <div class="avatar-custom avatar-custom--hair">
-                  <p class="avatar-custom__text">Причёска</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div>
-
-                <!-- <div class="avatar-custom avatar-custom--hat">
-                  <p class="avatar-custom__text">Шапка</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div> -->
-
-                <!-- <div class="avatar-custom avatar-custom--accessories">
-                  <p class="avatar-custom__text">Аксесуар</p>
-                  <input class="avatar-custom__range" type="range" min="0" max="10" step="1" value="0">
-                  <p class="avatar-custom__value">0</p>
-                </div> -->
-                <div class="wrapper-avatar wrapper-avatar--custom">
-                  <div class="wrapper-avatar__content">
-
-                  </div>
-                  
-                </div>
-                      <button class="wrapper-avatar__generate-btn btn" type="button">сгенерировать</button>
-
-                <button class="btn__data-back btn__data-back-reg" type="button">
+                <button class="registration-form__btn btn" type="submit">Войти</button>
+                <button class="btn__data-back" type="button">
                   <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
-                    <use xlink:href="images/sprite.svg#icon-back"></use>
+                    <use xlink:href="images/sprite.svg#icon-close"></use>
                   </svg>
                 </button>
               </form>
             </div>
           </div>
+
+          <!-- карта регистрации -->
+          <div class="card wrapper-registration">
+            <div class="card__double">
+              <form class="registration-form" action="#" method="POST">
+                <h2 class="registration-form__name">Регистрация</h2>
+                <div class="registration-form__wrapper">
+                  <div class="registration-form__inner registration-form__inner--row">
+                    <div class="custom-input">
+                      <input class="custom-input__field" type="text" name="nik-name" id="_nik-name" required>
+                      <label class="custom-input__label" for="nik-name">Ник</label>
+                    </div>
+                    <div class="custom-input">
+                      <input class="custom-input__field" type="text" name="login" id="_login" required>
+                      <label class="custom-input__label" for="login">Логин</label>
+                    </div>
+                    <div class="custom-input">
+                      <input class="custom-input__field" type="password" name="password" id="_password">
+                      <label class="custom-input__label" for="password">Пароль</label>
+                    </div>
+                  </div>
+                  <div class="custom-radio__wrap custom-radio__wrap--col">
+                    <p class="custom-radio__text">Укажите Ваш пол:</p>
+                    <div class="custom-radio__wrap custom-radio__wrap--row">
+                      <div class="custom-radio">
+                        <input class="custom-radio__field" type="radio" id="gender_male" name="gender">
+                        <label class="custom-radio__label" for="gender_male">
+                          Мужчина</label>
+                      </div>
+                      <div class="custom-radio">
+                        <input class="custom-radio__field" type="radio" id="gender_female" name="gender">
+                        <label class="custom-radio__label" for="gender_female">
+                          Женщина</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="wrapper-avatar">
+                    <p class="wrapper-avatar__text">Аватар:</p>
+                    <div class="wrapper-avatar__inner">
+                      <div class="wrapper-avatar__content wrapper-avatar__content--btn">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="custom-checkbox">
+                  <input class="custom-checkbox__field visually-hidden" type="checkbox" id="agree" name="agree">
+                  <label class="custom-checkbox__label" for="agree">
+                    <span class="custom-checkbox__heading">Согласен на&nbsp;обработку и&nbsp;передачу
+                      <a class="custom-checkbox__label-link" href="#"> персональных данных</a>
+                    </span>
+                    <svg class="custom-checkbox__icon" width="12" height="12" aria-hidden="true">
+                      <use xlink:href="images/sprite.svg#icon-check"></use>
+                    </svg>
+                  </label>
+                </div>
+                <button class="registration-form__btn btn" type="submit">Зарегистрироваться</button>
+                <button class="btn__data-back" type="button">
+                  <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                    <use xlink:href="images/sprite.svg#icon-close"></use>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- карта описания -->
+          <div class="card wrapper-note">
+            <div class="card__double">
+              <div class="card__triple">
+                <div class="wrapper-note__registration">
+                  <form class="registration-form" action="#" method="POST">
+                    <h2 class="registration-form__name">Настройка аватарки</h2>
+
+                    <!-- <div class="avatar-custom avatar-custom--background">
+                      <p class="avatar-custom__text">Фон</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div> -->
+
+                    <!-- <div class="avatar-custom avatar-custom--dress">
+                      <p class="avatar-custom__text">Одежда</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div> -->
+
+                    <div class="avatar-custom avatar-custom--ears">
+                      <p class="avatar-custom__text">Уши</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <div class="avatar-custom avatar-custom--skin">
+                      <p class="avatar-custom__text">Цвет кожи</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <div class="avatar-custom avatar-custom--chin">
+                      <p class="avatar-custom__text">Подбородок</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <div class="avatar-custom avatar-custom--mouth ">
+                      <p class="avatar-custom__text">Рот</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <!-- <div class="avatar-custom avatar-custom--mustache">
+                      <p class="avatar-custom__text">Усы</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <div class="avatar-custom avatar-custom--beard">
+                      <p class="avatar-custom__text">Борода</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div> -->
+
+                    <div class="avatar-custom avatar-custom--eye">
+                      <p class="avatar-custom__text">Глаза</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <!-- <div class="avatar-custom avatar-custom--glasses">
+                      <p class="avatar-custom__text">Очки</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div> -->
+
+                    <div class="avatar-custom avatar-custom--nose">
+                      <p class="avatar-custom__text">Нос</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <div class="avatar-custom avatar-custom--hair">
+                      <p class="avatar-custom__text">Причёска</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div>
+
+                    <!-- <div class="avatar-custom avatar-custom--hat">
+                      <p class="avatar-custom__text">Шапка</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div> -->
+
+                    <!-- <div class="avatar-custom avatar-custom--accessories">
+                      <p class="avatar-custom__text">Аксесуар</p>
+                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
+                      <p class="avatar-custom__value">1</p>
+                    </div> -->
+                    <div class="wrapper-avatar wrapper-avatar--custom">
+                      <div class="wrapper-avatar__content">
+
+                      </div>
+                    </div>
+                    <button class="registration-form__btn btn" type="button">Сгенерировать</button>
+                    <button class="btn__data-back btn__data-back-reg" type="button">
+                      <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                        <use xlink:href="images/sprite.svg#icon-close"></use>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </section>
   </main>
-
   <footer class="footer">
     <div class="container">
       <div class="header__wrapper">
@@ -267,7 +275,7 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer>  
 </body>
 
 </html>

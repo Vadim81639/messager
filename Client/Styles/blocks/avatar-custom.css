@@ -39,10 +39,6 @@
   /* color: black; */
 }
 
-.avatar-custom--skin {
-    /* border: 1px solid red; */
-}
-
 .wrapper-avatar__inner {
     display: flex;
     gap: 20px;
@@ -59,7 +55,8 @@
 }
 
 .wrapper-avatar__content {
-    border: 1px solid blue;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.7);
+    background-color: #e1efff;
     border-radius: 15px;
     width: 128px;
     height: 128px;
