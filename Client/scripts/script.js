@@ -9,7 +9,76 @@ let avatar_svg_path = {
 }
 
 const Render_avatar = (repaint, win) => {
-    // тут рендер
+    // Выбираем правильный контейнер в зависимости от окна
+    let avawinEl;
+    
+    if (win === 0) {
+        avawinEl = document.querySelector('.wrapper-registration .wrapper-avatar__content');
+    } else if (win === 1) {
+        avawinEl = document.querySelector('.wrapper-note .wrapper-avatar__content');
+    }
+    console.log('Контейнер для win=' + win + ':', avawinEl);
+    avawinEl.innerHTML = '';
+    
+    // Создаем SVG
+    const svgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgEl.classList.add('avatar-sprite');
+    svgEl.setAttribute('width', '100%');
+    svgEl.setAttribute('height', '100%');
+    svgEl.setAttribute('viewBox', '0 0 100 100');
+
+    const faceEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const bodyEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const backimgEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const earEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const chinEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const mouthEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const eyeEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const noseEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const hairEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+
+    faceEl.setAttribute('href', 'images/avatar_img/sprite_avatar_man.svg#face1')
+    bodyEl.setAttribute('href', 'images/avatar_img/sprite_avatar_man.svg#body1')
+    backimgEl.setAttribute('href', 'images/avatar_img/sprite_avatar_other.svg#backimage1')
+
+    earEl.setAttribute('href',repaint.ear)
+    chinEl.setAttribute('href',repaint.chin)
+    mouthEl.setAttribute('href',repaint.mouth)
+    eyeEl.setAttribute('href',repaint.eye)
+    noseEl.setAttribute('href',repaint.nose)
+    hairEl.setAttribute('href',repaint.hair)
+
+
+    svgEl.appendChild(backimgEl)
+    svgEl.appendChild(bodyEl)
+    svgEl.appendChild(earEl)
+    svgEl.appendChild(faceEl)
+    svgEl.appendChild(chinEl)
+    svgEl.appendChild(mouthEl)
+    svgEl.appendChild(eyeEl)
+    svgEl.appendChild(noseEl)
+    svgEl.appendChild(hairEl)
+
+    // // Сначала фон (кожа) - будет внизу
+    // const skinEl = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    // skinEl.setAttribute('width', '100%');
+    // skinEl.setAttribute('height', '100%');
+    // // skinEl.style.fill = repaint.ear;
+    // svgEl.appendChild(skinEl);
+    
+    // Потом все части аватара
+    const parts = ['ear', 'chin', 'mouth', 'eye', 'nose', 'hair'];
+    parts.forEach(part => {
+        if (repaint[part]) {
+            const useEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+            useEl.setAttribute('href', repaint.chin);//`images/avatar_img/sprite_avatar_man.svg#ear1`);
+            // useEl.setAttribute('class', 'images/sprite.svg#icon-close')// `avatar-${part}`);
+            svgEl.appendChild(useEl);
+        }
+    });
+    
+    avawinEl.appendChild(svgEl);
+    console.log('Рендер в окне ' + win + ' завершен');
 }
 
 const init = (page) => {
@@ -31,7 +100,7 @@ const init = (page) => {
             registrationWinEl.style.display = 'flex';
             loginWinEl.style.display = 'none';
             noteWinEl.style.display = 'none';  
-            Render_avatar(repaint_avatar(avatar, 'registr'), 0); 
+            Render_avatar(repaint_avatar(avatar), 0); 
             console.log('registr');
             break;
         }
@@ -48,7 +117,7 @@ const init = (page) => {
             registrationWinEl.style.display = 'none';
             loginWinEl.style.display = 'none';
             noteWinEl.style.display = 'flex';    
-            Render_avatar(repaint_avatar(avatar, 'avatar'), 1);     
+            Render_avatar(repaint_avatar(avatar), 1);     
             console.log('avatar');
             break;
         }        
@@ -114,51 +183,51 @@ addEventListener('DOMContentLoaded', () => {
     })
 
     rangeEarsInput.addEventListener('input', () => {
-            avatar.ear = rangeEarsInput.value-1;
-            EarsValEl.textContent = avatar.ear;
-            Render_avatar(repaint_avatar(avatar, 'Ears'), 1);
+            avatar.ear = rangeEarsInput.value - 1;
+            EarsValEl.textContent = avatar.ear + 1;
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.ear);
         });
 
     rangeSkinInput.addEventListener('input', () => {
-            avatar.skin = rangeSkinInput.value-1;
-            SkinValEl.textContent = avatar.skin
-            Render_avatar(repaint_avatar(avatar, 'Skin'), 1);
+            avatar.skin = rangeSkinInput.value - 1;
+            SkinValEl.textContent = avatar.skin + 1
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.skin);
         });
         
     rangeChinInput.addEventListener('input', () => {
-            avatar.chin = rangeChinInput.value-1;
-            ChinValEl.textContent = avatar.chin
-            Render_avatar(repaint_avatar(avatar, 'Chin'), 1);
+            avatar.chin = rangeChinInput.value - 1;
+            ChinValEl.textContent = avatar.chin + 1
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.chin);
         });
         
     rangeMouthInput.addEventListener('input', () => {
-            avatar.mouth = rangeMouthInput.value-1;
-            MouthValEl.textContent = avatar.mouth
-            Render_avatar(repaint_avatar(avatar, 'Mouth'), 1);
+            avatar.mouth = rangeMouthInput.value - 1;
+            MouthValEl.textContent = avatar.mouth + 1
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.mouth);
         });
         
     rangeEyeInput.addEventListener('input', () => {
-            avatar.eye = rangeEyeInput.value-1;
-            EyeValEl.textContent = avatar.eye
-            Render_avatar(repaint_avatar(avatar, 'Eye'), 1);
+            avatar.eye = rangeEyeInput.value - 1;
+            EyeValEl.textContent = avatar.eye + 1
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.eye);
         });
         
     rangeNoseInput.addEventListener('input', () => {
-            avatar.nose = rangeNoseInput.value-1;
-            NoseValEl.textContent = avatar.nose
-            Render_avatar(repaint_avatar(avatar, 'Nose'), 1);
+            avatar.nose = rangeNoseInput.value - 1;
+            NoseValEl.textContent = avatar.nose + 1
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.nose);
         });
         
     rangeHairInput.addEventListener('input', () => {
-            avatar.hair = rangeHairInput.value-1;
-            HairValEl.textContent = avatar.hair
-            Render_avatar(repaint_avatar(avatar, 'Hair'), 1);
+            avatar.hair = rangeHairInput.value - 1;
+            HairValEl.textContent = avatar.hair + 1
+            Render_avatar(repaint_avatar(avatar), 1);
             console.log(avatar.hair);
         });
 })
