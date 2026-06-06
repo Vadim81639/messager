@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-  </header>  
+  </header>
   <main>
     <section class="welcome-page">
       <h1 class="visually-hidden" aria-hidden="false">Регистрация&nbsp;&mdash; мессенджера</h1>
@@ -50,11 +50,10 @@
               </div>
             </form>
           </div>
-
           <!-- карта логина -->
           <div class="card wrapper-login">
             <div class="card__double">
-              <form class="registration-form " action="#" method="POST">
+              <form class="registration-form submit-login" action="#" method="POST">
                 <h2 class="registration-form__name">Вход</h2>
                 <div class="registration-form__wrapper registration-form__wrapper--login">
                   <div class="registration-form__inner registration-form__inner--row">
@@ -80,11 +79,10 @@
               </form>
             </div>
           </div>
-
           <!-- карта регистрации -->
           <div class="card wrapper-registration">
             <div class="card__double">
-              <form class="registration-form" action="#" method="POST">
+              <form class="registration-form submit-reg" action="#" method="POST">
                 <h2 class="registration-form__name">Регистрация</h2>
                 <div class="registration-form__wrapper">
                   <div class="registration-form__inner registration-form__inner--row">
@@ -100,24 +98,29 @@
                       <input class="custom-input__field" type="password" name="password" id="_password">
                       <label class="custom-input__label" for="password">Пароль</label>
                     </div>
+                    <div class="custom-input">
+                      <input class="custom-input__field" type="password" name="password" id="confirm_password">
+                      <label class="custom-input__label" for="password">Подтверждение пароля</label>
+                    </div>                    
                   </div>
-                  <div class="custom-radio__wrap custom-radio__wrap--col">
-                    <p class="custom-radio__text">Укажите Ваш пол:</p>
+                  <div class="custom-radio__wrap custom-radio__wrap--row">
+                    <p class="custom-radio__text">Ваш пол:</p>
                     <div class="custom-radio__wrap custom-radio__wrap--row">
                       <div class="custom-radio">
-                        <input class="custom-radio__field" type="radio" id="gender_male" name="gender">
+                        <input class="custom-radio__field custom-radio__field--male" type="radio" id="gender_male"
+                          name="gender" checked>
                         <label class="custom-radio__label" for="gender_male">
                           Мужчина</label>
                       </div>
                       <div class="custom-radio">
-                        <input class="custom-radio__field" type="radio" id="gender_female" name="gender">
+                        <input class="custom-radio__field custom-radio__field--female" type="radio" id="gender_female"
+                          name="gender">
                         <label class="custom-radio__label" for="gender_female">
                           Женщина</label>
                       </div>
                     </div>
                   </div>
                   <div class="wrapper-avatar">
-                    <!-- <p class="wrapper-avatar__text">Аватар:</p> -->
                     <div class="wrapper-avatar__inner">
                       <div class="wrapper-avatar__content wrapper-avatar__content--btn">
 
@@ -126,10 +129,12 @@
                   </div>
                 </div>
                 <div class="custom-checkbox">
-                  <input class="custom-checkbox__field visually-hidden" type="checkbox" id="agree" name="agree">
+                  <input class="custom-checkbox__field custom-checkbox__field--agree visually-hidden" type="checkbox"
+                    id="agree" name="agree">
                   <label class="custom-checkbox__label" for="agree">
                     <span class="custom-checkbox__heading">Согласен на&nbsp;обработку и&nbsp;передачу
-                      <a class="custom-checkbox__label-link" href="#"> персональных данных</a>
+                      <a class="custom-checkbox__label-link custom-checkbox__label-link--personal-data" href="#">
+                        персональных данных</a>
                     </span>
                     <svg class="custom-checkbox__icon" width="12" height="12" aria-hidden="true">
                       <use xlink:href="images/sprite.svg#icon-check"></use>
@@ -145,26 +150,13 @@
               </form>
             </div>
           </div>
-
-          <!-- карта описания -->
+          <!-- настройка аватара -->
           <div class="card wrapper-note">
             <div class="card__double">
               <div class="card__triple">
                 <div class="wrapper-note__registration">
                   <form class="registration-form" action="#" method="POST">
                     <h2 class="registration-form__name">Настройка аватарки</h2>
-
-                    <!-- <div class="avatar-custom avatar-custom--background">
-                      <p class="avatar-custom__text">Фон</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div> -->
-
-                    <!-- <div class="avatar-custom avatar-custom--dress">
-                      <p class="avatar-custom__text">Одежда</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div> -->
 
                     <div class="avatar-custom avatar-custom--ears">
                       <p class="avatar-custom__text">Уши</p>
@@ -190,29 +182,11 @@
                       <p class="avatar-custom__value">1</p>
                     </div>
 
-                    <!-- <div class="avatar-custom avatar-custom--mustache">
-                      <p class="avatar-custom__text">Усы</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div>
-
-                    <div class="avatar-custom avatar-custom--beard">
-                      <p class="avatar-custom__text">Борода</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div> -->
-
                     <div class="avatar-custom avatar-custom--eye">
                       <p class="avatar-custom__text">Глаза</p>
                       <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
                       <p class="avatar-custom__value">1</p>
                     </div>
-
-                    <!-- <div class="avatar-custom avatar-custom--glasses">
-                      <p class="avatar-custom__text">Очки</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div> -->
 
                     <div class="avatar-custom avatar-custom--nose">
                       <p class="avatar-custom__text">Нос</p>
@@ -226,23 +200,11 @@
                       <p class="avatar-custom__value">1</p>
                     </div>
 
-                    <!-- <div class="avatar-custom avatar-custom--hat">
-                      <p class="avatar-custom__text">Шапка</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div> -->
-
-                    <!-- <div class="avatar-custom avatar-custom--accessories">
-                      <p class="avatar-custom__text">Аксесуар</p>
-                      <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
-                      <p class="avatar-custom__value">1</p>
-                    </div> -->
                     <div class="wrapper-avatar wrapper-avatar--custom">
-                      <div class="wrapper-avatar__content">
-
-                      </div>
+                      <div class="wrapper-avatar__content"></div>
                     </div>
-                    <button class="registration-form__btn btn registration-form__btn--generator" type="button">Сгенерировать</button>
+                    <button class="registration-form__btn btn registration-form__btn--generator"
+                      type="button">Сгенерировать</button>
                     <button class="btn__data-back btn__data-back-reg" type="button">
                       <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
                         <use xlink:href="images/sprite.svg#icon-close"></use>
@@ -252,9 +214,87 @@
                 </div>
               </div>
             </div>
-
           </div>
-
+          <!-- карта описания -->
+          <div class="card wrapper-personal-data">
+            <div class="card__double">
+              <div class="card__triple">
+                <div class="wrapper-personal-data__registration">
+                  <form class="registration-form" action="#" method="POST">
+                    <h2 class="registration-form__name registration-form__name--header">Согласие на&nbsp;обработку
+                      и&nbsp;передачу персональных данных</h2>
+                    <div class="personal-box">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum aspernatur itaque totam nulla
+                        dicta recusandae fuga nisi, illo sequi! Perferendis iusto nesciunt sed ab laudantium,
+                        accusantium magni corporis laborum temporibus.
+                        Quaerat expedita incidunt accusantium nam, esse voluptatem ad doloribus ut tempore soluta
+                        aspernatur hic excepturi. Soluta ipsam natus adipisci, consequuntur nostrum, dolorem sunt
+                        maiores, odit est distinctio cum eveniet nam!
+                        Modi at veritatis illo voluptates error sapiente et distinctio fuga dolores iure excepturi ad
+                        nisi quae obcaecati, atque quo. Delectus laudantium dolores doloremque omnis veniam dolor sit
+                        nobis soluta suscipit.
+                        Recusandae nam quod dolorem eaque quis, architecto hic cupiditate quos natus iste provident et
+                        corrupti, expedita atque dignissimos sed. Est, culpa! Porro ad obcaecati, reprehenderit sed
+                        repudiandae provident fuga error!
+                        Mollitia dolorem necessitatibus voluptates, minima unde corrupti recusandae? Earum, aliquam. Qui
+                        voluptas numquam sequi accusantium facere, harum consequuntur ipsa cum ad dolor mollitia
+                        accusamus ut odio nobis voluptatum aut fuga!
+                        Sequi maiores sunt eum vel optio sit, voluptates laudantium architecto nam, esse dolore soluta
+                        consequatur minus. Magnam quis suscipit dolore quasi hic libero itaque officia aspernatur.
+                        Tempore accusamus ut hic?
+                        Quae ullam, ex sapiente animi provident corrupti veritatis quasi illum atque enim, non id. Est,
+                        et tempore voluptate libero cumque possimus dolorem nulla praesentium officiis illum quis
+                        impedit culpa eveniet!
+                        Corrupti culpa quas dolor beatae, hic assumenda possimus nisi repudiandae odit sed magnam ex
+                        repellendus rerum iusto. Mollitia dolor nulla animi voluptatibus pariatur minima, illum, a,
+                        necessitatibus excepturi ut nam.
+                        Tenetur consequatur, eius neque delectus voluptas odio fuga mollitia commodi debitis rerum hic
+                        natus nihil iure quasi sed, eligendi veritatis quibusdam dolorem dolor harum! A asperiores nobis
+                        aspernatur consectetur fugit!
+                        Magni similique dolore facere ea porro odit minima incidunt! Laudantium unde pariatur voluptatem
+                        vel doloremque atque voluptates modi, obcaecati iusto repellat asperiores eaque quod culpa non
+                        expedita, tempora natus minima?
+                        Quidem, quisquam aperiam quibusdam, cupiditate consequatur recusandae odio quia odit magnam
+                        laborum eos ea, suscipit debitis incidunt mollitia alias ipsam ipsum dolore? Dolores, sed
+                        reiciendis! Laudantium ut ipsum est quis!
+                        Accusantium, molestias? Quam, aperiam! Libero incidunt quisquam eligendi nesciunt iste
+                        reprehenderit! Sint laudantium debitis quas accusantium neque at, cumque cupiditate molestiae,
+                        saepe sed dignissimos in obcaecati voluptatibus nulla distinctio dicta.
+                        Adipisci ullam nesciunt architecto dolorem consectetur consequatur illo veniam ea veritatis
+                        autem, optio saepe expedita incidunt, quia exercitationem. Corrupti consequuntur eaque
+                        dignissimos suscipit vero magnam quidem quam ratione impedit voluptate?
+                        Consequatur rem tenetur ipsum animi voluptatem repellat voluptatum perferendis magnam? Eius
+                        nesciunt, cupiditate aperiam dolor facere error delectus quae rerum dolorem cumque pariatur
+                        similique, ullam sunt quam dicta illum aut!
+                        Voluptates temporibus quos accusantium porro nam, incidunt perspiciatis assumenda numquam
+                        necessitatibus iusto quas qui nobis cupiditate culpa sint unde officiis dignissimos eaque!
+                        Asperiores facilis placeat maiores minus dicta itaque provident.
+                        Doloribus perferendis a exercitationem totam vero rem facere ex tempore atque fugiat. Rerum quos
+                        sapiente inventore voluptates, ab labore quidem distinctio laborum iure. Reprehenderit totam
+                        repellendus, fugiat dolorem nihil ipsa.
+                        Vitae, autem, eligendi repudiandae error excepturi vel recusandae, ex doloremque officiis
+                        laborum temporibus delectus neque rem odit possimus perspiciatis sint earum veniam architecto.
+                        Quisquam sunt, vitae nam natus nisi quae.
+                        Maiores, pariatur laboriosam et sapiente aut, ut nemo deleniti accusamus enim, qui excepturi
+                        eius quibusdam officia reprehenderit quas quisquam labore dolores impedit tempore? Nulla
+                        excepturi, possimus assumenda saepe ut voluptatem!
+                        Dignissimos deserunt quae assumenda est eos, suscipit, similique deleniti dicta accusamus fugit
+                        nam. Ullam obcaecati, vero provident aliquam ratione soluta neque sapiente reprehenderit itaque
+                        doloribus tempore facere. Nesciunt, dignissimos quisquam?
+                        Voluptatibus corrupti minima repudiandae nemo veniam nobis quos. Deleniti distinctio, tempore
+                        repellat ipsam omnis cumque iusto deserunt ipsa quaerat a repellendus voluptas fugit porro quos
+                        dolorem recusandae. In, laudantium porro?</p>
+                    </div>
+                    <button class="btn__data-back btn__data-back-reg" type="button">
+                      <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                        <use xlink:href="images/sprite.svg#icon-close"></use>
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -275,7 +315,7 @@
         </div>
       </div>
     </div>
-  </footer>  
+  </footer>
 </body>
 
 </html>

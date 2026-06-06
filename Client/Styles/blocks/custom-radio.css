@@ -51,6 +51,7 @@
 
 .custom-radio__wrap {
   display: flex;
+  margin-bottom: 5px;
   /* border: 1px solid red; */
 }  
 
@@ -64,10 +65,15 @@
 .custom-radio__wrap--row {
     display: flex;
     justify-content: space-around;  /* Распределит кнопки по краям */
-    gap: 20px;  /* Дополнительный отступ между кнопками */
+    gap: 15px;  /* Дополнительный отступ между кнопками */
     width: 100%;  /* Чтобы space-between работал, нужна ширина */
+    
 }
 
 .custom-radio__text {
-  margin-bottom: 15px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  width: 100px;
+  /* border: 1px solid red; */
 }

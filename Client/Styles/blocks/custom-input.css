@@ -19,13 +19,12 @@
   border: 1px solid #cdcfde;
   font-family: inherit;
   border-radius: 8px;
-  padding: 13px 44px  14px 16px; /*44 это безопасный паддинг, чтобы ввод пароля или логина не заходил под иконку*/
+  padding: 14px 14px  14px 14px; /*44 это безопасный паддинг, чтобы ввод пароля или логина не заходил под иконку*/
   width: 100%;
-  color: #8f939f;
-
-font-size: 14px;
-line-height: 16px;
-color: #8f939f;
+  color: #000000;
+  font-size: 14px;
+  line-height: 16px;
+/* color: #8f939f; */
 }
 
 .custom-input__field:hover {

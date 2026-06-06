@@ -72,4 +72,5 @@
 
 .wrapper-avatar__content--btn:hover {
     cursor: pointer;
+    outline: 3px solid #476bf0;
 }

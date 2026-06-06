@@ -1,6 +1,7 @@
 .custom-checkbox {
   position: relative;
   margin-top: auto;
+  margin-bottom: 20px;
 }
 
 .custom-checkbox__field:checked + .custom-checkbox__label .custom-checkbox__icon {
@@ -41,6 +42,11 @@
 
 .custom-checkbox__label-link {
   color: #476bf0;
+}
+
+.custom-checkbox__label-link--personal-data:hover {
+  color:#1818e7;
+  text-decoration: underline;
 }
 
 .custom-checkbox__icon {

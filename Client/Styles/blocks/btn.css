@@ -31,7 +31,11 @@
   border: none;
   padding: 15px;
   top: 22px;
-  right: -14px;
+  right: -24px;
+}
+
+.btn__data-back:hover {
+  background-color: #e0e0e0;
 }
 
 .btn__data-back:disabled {
