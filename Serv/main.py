@@ -36,13 +36,14 @@ class UserSchema(BaseModel):
     last_role: str = "user"
     nik_name: str = Field(min_length=3, max_length=32)
     gender: int = Field(ge=0, le=2, default=0)
-    show_meta: bool = True
+    show_meta: bool = False
+    avatar_collections: int = 0
     avatars: list[int] = Field(default_factory=lambda: [0] * 15)
     text_status: Optional[str] = Field(default=None, max_length=16)
     birth: datetime | None = None
     deadline: datetime | None = None
-    registration: datetime
-    last_visit: datetime
+    registration: datetime = datetime.now()
+    last_visit: datetime = datetime.now()
     status: int = 1
     Country: str = ""
     City: str = ""
@@ -53,15 +54,9 @@ class UserSchema(BaseModel):
 class UserCreate(BaseModel):
     login: str = Field(min_length=3, max_length=32)
     password: str = Field(min_length=1, max_length=32)
-    email: EmailStr | None
     nik_name: str = Field(min_length=3, max_length=32)
     gender: int = Field(ge=0, le=2)
-    show_meta: bool = False
-    avatars: list[int] = Field(default_factory=lambda: [0] * 9)
-    text_status: Optional[str] = Field(default=None, max_length=16)
-    birth: datetime | None = None
-    deadline: datetime | None = None
-    
+    avatars: list[int] = Field(default_factory=lambda: [0] * 7)
     model_config = ConfigDict(extra='forbid')
 
 
@@ -87,13 +82,13 @@ myUsers.append(UserSchema(
     login="admin",
     password="1234",
     token="",
-    email="admin@example.com",
     role="admin",
     last_role="admin",
     nik_name="Administrator",
     gender=1,
-    show_meta=True,
-    avatars=[1, 3, 1, 2, 4, 2, 5, 2, 1],
+    show_meta=False,
+    avatar_collections = 0,
+    avatars=[1, 3, 1, 2, 4, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0],
     text_status="Hello world!",
     birth=datetime(2000, 1, 1),
     deadline=datetime(2081, 12, 6),
@@ -141,25 +136,15 @@ async def registration(usr: UserCreate):
 
     new_user = UserSchema(
         id=get_next_id(),
-        login=usr.login,
-        password=usr.password,
-        token="",  # при регистрации токен пустой
-        email=usr.email,
-        role="user",
-        last_role="user",
         nik_name=usr.nik_name,
         gender=usr.gender,
-        show_meta=usr.show_meta,
+        login=usr.login,
+        password=usr.password,
         avatars=usr.avatars,
-        text_status=usr.text_status,
-        birth=usr.birth,
-        deadline=usr.deadline,
-        registration=datetime.now(),
-        last_visit=datetime.now(),
-        status=1,
-        buf_msg=[]
+        token=""
     )
     myUsers.append(new_user)
+    print('куку')
     return {"пользователь": "создан", "id": new_user.id}
 
 

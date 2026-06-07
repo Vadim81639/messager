@@ -1,7 +1,9 @@
 import repaint_avatar from "./repaint_avatars.js"
+import { loginUser } from "./api.js"
+import { registerUser } from "./api.js"
 
 let Data2Serv = {
-    nikname : '', login : '', gender : 0, 
+    nikname : '', login : '', gender : 0, agreeChecked : false,
     ear: 0, skin: 0, chin: 0, mouth: 0, eye: 0, nose: 0, hair: 0
 }
 
@@ -104,7 +106,11 @@ const init = (page) => {
             personalEl.style.display = 'flex';   
             Render_avatar(repaint_avatar(Data2Serv), 1);     
             break;
-        }                
+        }       
+        case 5 : {
+            console.log('autorizations');
+            break
+        }
     }
 }
 
@@ -118,6 +124,7 @@ addEventListener('DOMContentLoaded', () => {
     const radioManEl = document.querySelector('.custom-radio__field--male')
     const radioWomanEl = document.querySelector('.custom-radio__field--female')   
     const linkPersonal = document.querySelector('.custom-checkbox__label-link--personal-data')
+    const checkAgreeEl = document.querySelector('.custom-checkbox__field--agree')
     // регуляторы аватарки
     const rangeEarsInput = document.querySelector('.avatar-custom--ears .avatar-custom__range');    
     const rangeSkinInput = document.querySelector('.avatar-custom--skin .avatar-custom__range');
@@ -187,17 +194,27 @@ addEventListener('DOMContentLoaded', () => {
 
     radioManEl.addEventListener('click', () => {
         Data2Serv.gender = 0
-        // console.log('man');
+        console.log('man');
     })
 
     radioWomanEl.addEventListener('click', () => {
         Data2Serv.gender = 1
-        // console.log('woman');
+        console.log('woman');
     })
 
     linkPersonal.addEventListener('click', () => {
         init(4)
     })
+
+    checkAgreeEl.addEventListener('change', () => {
+        if (checkAgreeEl.checked) {
+            Data2Serv.agreeChecked = true
+            console.log('Согласие получено');
+        } else {
+             Data2Serv.agreeChecked = false
+            console.log('Согласие отозвано');
+        }
+    })        
 
     rangeEarsInput.addEventListener('input', () => {
             Data2Serv.ear = rangeEarsInput.value - 1;
@@ -245,36 +262,26 @@ addEventListener('DOMContentLoaded', () => {
 
 const handleRegSubmit = (e) => {
     e.preventDefault()
-    const checkAgreeEl = document.querySelector('.custom-checkbox__field--agree')
     const nicknameFieldEl = document.querySelector('#_nik-name')
     const loginFieldEl = document.querySelector('#_login')
     const passwordFieldEl = document.querySelector('#_password')
     const confirm_passwordFieldEl = document.querySelector('#confirm_password')
-    let agreeChecked = false
-    checkAgreeEl.addEventListener('change', () => {
-        if (checkAgreeEl.checked) {
-            agreeChecked = true
-            // console.log('Согласие получено');
-        } else {
-            agreeChecked = false
-            // console.log('Согласие отозвано');
-        }
-    })    
-    
-    if (!agreeChecked) return console.log('нет подписи согласия на обработку данных')
-    
- // Сразу отправляем на сервер но ник и логин записать в локал стореж и оставлять в полях
-    // sendToServer({
-    //     nikname: document.querySelector('#_nik-name').value,
-    //     login: document.querySelector('#_login').value,
-    //     password: password,  // сразу в запрос
-    //     gender: Data2Serv.gender,
-    //     avatar: Data2Serv
-    // });
+    if (passwordFieldEl.value !== confirm_passwordFieldEl.value) {
+        console.log('пароли не совпадают');
+        return
+    } else 
+        console.log('пароли совпадают');
+
+    if (!Data2Serv.agreeChecked) return console.log('нет подписи согласия на обработку данных')
+    Data2Serv.nikname = nicknameFieldEl.value
+    Data2Serv.login = loginFieldEl.value
+    console.log(Data2Serv.nikname);
+    registerUser(Data2Serv, passwordFieldEl.value)    
 }
 
 const handleLoginSubmit = (e) => {
     e.preventDefault()
+    loginUser()
 }
 
 regFormEl.addEventListener("submit", handleRegSubmit);
