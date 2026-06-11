@@ -33,7 +33,7 @@ class UserSchema(BaseModel):
     token: str = ""
     email: EmailStr | None = None
     role: str = "user"
-    last_role: str = "user"
+    last_role: str = ""
     nik_name: str = Field(min_length=3, max_length=32)
     gender: int = Field(ge=0, le=2, default=0)
     show_meta: bool = False
@@ -85,7 +85,7 @@ myUsers.append(UserSchema(
     role="admin",
     last_role="admin",
     nik_name="Administrator",
-    gender=1,
+    gender=0,
     show_meta=False,
     avatar_collections = 0,
     avatars=[1, 3, 1, 2, 4, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0],

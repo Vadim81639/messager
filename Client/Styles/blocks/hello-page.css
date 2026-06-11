@@ -51,7 +51,8 @@
 .wrapper-registration,
 .wrapper-login,
 .wrapper-note,
-.wrapper-personal-data {
+.wrapper-personal-data,
+.wrapper-app-main {
     background:rgb(237, 246, 250);
 }
 

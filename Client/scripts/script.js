@@ -1,10 +1,9 @@
 import repaint_avatar from "./repaint_avatars.js"
-import { loginUser } from "./api.js"
-import { registerUser } from "./api.js"
+import { loginUser, registerUser, getToken, loadUserProfile, removeToken } from "./api.js"
 
 let Data2Serv = {
     nikname : '', login : '', gender : 0, agreeChecked : false,
-    ear: 0, skin: 0, chin: 0, mouth: 0, eye: 0, nose: 0, hair: 0
+    head: 0, body: 0, dress: 0, ear: 0, chin: 0, mouth: 0, eye: 0, nose: 0, hair: 0
 }
 
 const regFormEl = document.querySelector('.submit-reg')
@@ -28,7 +27,9 @@ const Render_avatar = (repaint, win) => {
     svgEl.setAttribute('height', '100%');
     svgEl.setAttribute('viewBox', '0 0 100 100');
     const faceEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const headEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');    
     const bodyEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    const dressEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     const backimgEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     const earEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     const chinEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
@@ -36,8 +37,9 @@ const Render_avatar = (repaint, win) => {
     const eyeEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     const noseEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
     const hairEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-    faceEl.setAttribute('href', 'images/avatar_img/sprite_avatar_man.svg#face1')
-    bodyEl.setAttribute('href', 'images/avatar_img/sprite_avatar_man.svg#body1')
+    bodyEl.setAttribute('href',repaint.body)
+    headEl.setAttribute('href',repaint.head)    
+    dressEl.setAttribute('href',repaint.dress)  
     backimgEl.setAttribute('href', 'images/avatar_img/sprite_avatar_other.svg#backimage1')
     earEl.setAttribute('href',repaint.ear)
     chinEl.setAttribute('href',repaint.chin)
@@ -47,8 +49,9 @@ const Render_avatar = (repaint, win) => {
     hairEl.setAttribute('href',repaint.hair)
     svgEl.appendChild(backimgEl)
     svgEl.appendChild(bodyEl)
+    svgEl.appendChild(dressEl)    
     svgEl.appendChild(earEl)
-    svgEl.appendChild(faceEl)
+    svgEl.appendChild(headEl)
     svgEl.appendChild(chinEl)
     svgEl.appendChild(mouthEl)
     svgEl.appendChild(eyeEl)
@@ -63,6 +66,7 @@ const init = (page) => {
     const loginWinEl = document.querySelector('.wrapper-login');
     const noteWinEl = document.querySelector('.wrapper-note');
     const personalEl = document.querySelector('.wrapper-personal-data')
+    const appEl = document.querySelector('.wrapper-app-main')
     switch (page) {
         case 0 : {
             startWinEl.style.display = 'flex';
@@ -70,6 +74,7 @@ const init = (page) => {
             loginWinEl.style.display = 'none';
             noteWinEl.style.display = 'none';
             personalEl.style.display = 'none';
+            appEl.style.display = 'none';
             break;
         }
         case 1 : {
@@ -78,6 +83,7 @@ const init = (page) => {
             loginWinEl.style.display = 'none';
             noteWinEl.style.display = 'none';  
             personalEl.style.display = 'none';
+            appEl.style.display = 'none';
             Render_avatar(repaint_avatar(Data2Serv), 0); 
             break;
         }
@@ -87,6 +93,7 @@ const init = (page) => {
             loginWinEl.style.display = 'flex';
             noteWinEl.style.display = 'none';  
             personalEl.style.display = 'none';
+            appEl.style.display = 'none';
             break;
         }                
         case 3 : { 
@@ -95,6 +102,7 @@ const init = (page) => {
             loginWinEl.style.display = 'none';
             noteWinEl.style.display = 'flex'; 
             personalEl.style.display = 'none';   
+            appEl.style.display = 'none';
             Render_avatar(repaint_avatar(Data2Serv), 1);     
             break;
         }       
@@ -104,17 +112,23 @@ const init = (page) => {
             loginWinEl.style.display = 'none';
             noteWinEl.style.display = 'none'; 
             personalEl.style.display = 'flex';   
-            Render_avatar(repaint_avatar(Data2Serv), 1);     
+            appEl.style.display = 'none';
             break;
         }       
         case 5 : {
+            startWinEl.style.display = 'none';
+            registrationWinEl.style.display = 'none';
+            loginWinEl.style.display = 'none';
+            noteWinEl.style.display = 'none'; 
+            personalEl.style.display = 'none';   
+            appEl.style.display = 'flex';
             console.log('autorizations');
             break
         }
     }
 }
 
-addEventListener('DOMContentLoaded', () => {
+addEventListener('DOMContentLoaded', async () => {
     // кнопки
     const butLoginEl = document.querySelector('.registration-form__btn--login');
     const butRegEl = document.querySelector('.registration-form__btn--reg');    
@@ -125,9 +139,10 @@ addEventListener('DOMContentLoaded', () => {
     const radioWomanEl = document.querySelector('.custom-radio__field--female')   
     const linkPersonal = document.querySelector('.custom-checkbox__label-link--personal-data')
     const checkAgreeEl = document.querySelector('.custom-checkbox__field--agree')
+    const logoutEl = document.querySelector('.registration-form__btn--logout')
     // регуляторы аватарки
     const rangeEarsInput = document.querySelector('.avatar-custom--ears .avatar-custom__range');    
-    const rangeSkinInput = document.querySelector('.avatar-custom--skin .avatar-custom__range');
+    const rangeDressInput = document.querySelector('.avatar-custom--dress .avatar-custom__range');
     const rangeChinInput = document.querySelector('.avatar-custom--chin .avatar-custom__range');
     const rangeMouthInput = document.querySelector('.avatar-custom--mouth .avatar-custom__range');
     const rangeEyeInput = document.querySelector('.avatar-custom--eye .avatar-custom__range');
@@ -135,129 +150,144 @@ addEventListener('DOMContentLoaded', () => {
     const rangeHairInput = document.querySelector('.avatar-custom--hair .avatar-custom__range');
     // значения регуляторов
     const EarsValEl = document.querySelector('.avatar-custom--ears .avatar-custom__value');
-    const SkinValEl = document.querySelector('.avatar-custom--skin .avatar-custom__value');
+    const DressValEl = document.querySelector('.avatar-custom--dress .avatar-custom__value');
     const ChinValEl = document.querySelector('.avatar-custom--chin .avatar-custom__value');
     const MouthValEl = document.querySelector('.avatar-custom--mouth .avatar-custom__value');
     const EyeValEl = document.querySelector('.avatar-custom--eye .avatar-custom__value');
     const NoseValEl = document.querySelector('.avatar-custom--nose .avatar-custom__value');
     const HairValEl = document.querySelector('.avatar-custom--hair .avatar-custom__value');          
 
-    init(0);
+    // console.log(getToken())
+    const userProfile = await loadUserProfile()
+    if (userProfile) {
+        init(5) 
+        console.log('===>>> ' + userProfile.nik_name)
+    } else { init(0); }
 
-    butRegEl.addEventListener('click', () => {
-        init(1)
-    })
+        butRegEl.addEventListener('click', () => {
+            init(1)
+        })
 
-    butLoginEl.addEventListener('click', () => {
-        init(2)
-    })
+        butLoginEl.addEventListener('click', () => {
+            init(2)
+        })
 
-    butBackEls.forEach(button => {
-        button.addEventListener('click', () => {
-            if (button.classList.contains('btn__data-back-reg')) {
-            init(1);
-            }
-            else {
-                init(0)                
-            }
-        });
-    });
-
-    butGenEl.addEventListener('click', () => {
-        Data2Serv.ear = generateNum(5)
-        Data2Serv.chin = generateNum(5)
-        Data2Serv.eye = generateNum(5)
-        Data2Serv.hair = generateNum(5)
-        Data2Serv.mouth = generateNum(5)
-        Data2Serv.nose = generateNum(5)
-        Data2Serv.skin = generateNum(5)
-        rangeEarsInput.value = Data2Serv.ear + 1
-        rangeSkinInput.value = Data2Serv.skin + 1
-        rangeChinInput.value = Data2Serv.chin + 1
-        rangeMouthInput.value = Data2Serv.mouth + 1
-        rangeEyeInput.value = Data2Serv.eye + 1
-        rangeNoseInput.value = Data2Serv.nose + 1
-        rangeHairInput.value = Data2Serv.hair + 1
-        EarsValEl.textContent = Data2Serv.ear + 1
-        SkinValEl.textContent = Data2Serv.skin + 1
-        ChinValEl.textContent = Data2Serv.chin + 1
-        MouthValEl.textContent = Data2Serv.mouth + 1
-        EyeValEl.textContent = Data2Serv.eye + 1
-        NoseValEl.textContent = Data2Serv.nose + 1
-        HairValEl.textContent = Data2Serv.hair + 1
-        Render_avatar(repaint_avatar(Data2Serv), 1);
-    })
-
-    butCustomEl.addEventListener('click', () => {
-        init(3)        
-    })
-
-    radioManEl.addEventListener('click', () => {
-        Data2Serv.gender = 0
-        console.log('man');
-    })
-
-    radioWomanEl.addEventListener('click', () => {
-        Data2Serv.gender = 1
-        console.log('woman');
-    })
-
-    linkPersonal.addEventListener('click', () => {
-        init(4)
-    })
-
-    checkAgreeEl.addEventListener('change', () => {
-        if (checkAgreeEl.checked) {
-            Data2Serv.agreeChecked = true
-            console.log('Согласие получено');
-        } else {
-             Data2Serv.agreeChecked = false
-            console.log('Согласие отозвано');
-        }
-    })        
-
-    rangeEarsInput.addEventListener('input', () => {
-            Data2Serv.ear = rangeEarsInput.value - 1;
-            EarsValEl.textContent = Data2Serv.ear + 1;
-            Render_avatar(repaint_avatar(Data2Serv), 1);
+        butBackEls.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.classList.contains('btn__data-back-reg')) {
+                init(1);
+                }
+                else {
+                    init(0)                
+                }
+            });
         });
 
-    rangeSkinInput.addEventListener('input', () => {
-            Data2Serv.skin = rangeSkinInput.value - 1;
-            SkinValEl.textContent = Data2Serv.skin + 1
-            Render_avatar(repaint_avatar(Data2Serv), 1);
-        });
-        
-    rangeChinInput.addEventListener('input', () => {
-            Data2Serv.chin = rangeChinInput.value - 1;
+        butGenEl.addEventListener('click', () => {
+            Data2Serv.ear = generateNum(5)
+            Data2Serv.chin = generateNum(5)
+            Data2Serv.eye = generateNum(5)
+            Data2Serv.hair = generateNum(5)
+            Data2Serv.mouth = generateNum(5)
+            Data2Serv.nose = generateNum(5)
+            Data2Serv.dress = generateNum(5)
+            rangeEarsInput.value = Data2Serv.ear + 1
+            rangeDressInput.value = Data2Serv.dress + 1
+            rangeChinInput.value = Data2Serv.chin + 1
+            rangeMouthInput.value = Data2Serv.mouth + 1
+            rangeEyeInput.value = Data2Serv.eye + 1
+            rangeNoseInput.value = Data2Serv.nose + 1
+            rangeHairInput.value = Data2Serv.hair + 1
+            EarsValEl.textContent = Data2Serv.ear + 1
+            DressValEl.textContent = Data2Serv.dress + 1
             ChinValEl.textContent = Data2Serv.chin + 1
-            Render_avatar(repaint_avatar(Data2Serv), 1);
-        });
-        
-    rangeMouthInput.addEventListener('input', () => {
-            Data2Serv.mouth = rangeMouthInput.value - 1;
             MouthValEl.textContent = Data2Serv.mouth + 1
-            Render_avatar(repaint_avatar(Data2Serv), 1);
-        });
-        
-    rangeEyeInput.addEventListener('input', () => {
-            Data2Serv.eye = rangeEyeInput.value - 1;
             EyeValEl.textContent = Data2Serv.eye + 1
-            Render_avatar(repaint_avatar(Data2Serv), 1);
-        });
-        
-    rangeNoseInput.addEventListener('input', () => {
-            Data2Serv.nose = rangeNoseInput.value - 1;
             NoseValEl.textContent = Data2Serv.nose + 1
-            Render_avatar(repaint_avatar(Data2Serv), 1);
-        });
-        
-    rangeHairInput.addEventListener('input', () => {
-            Data2Serv.hair = rangeHairInput.value - 1;
             HairValEl.textContent = Data2Serv.hair + 1
             Render_avatar(repaint_avatar(Data2Serv), 1);
-        });
-    renderTable();        
+        })
+
+        butCustomEl.addEventListener('click', () => {
+            init(3)        
+        })
+
+        radioManEl.addEventListener('click', () => {
+            Data2Serv.gender = 0
+            Render_avatar(repaint_avatar(Data2Serv), 0);
+            console.log('man');
+        })
+
+        radioWomanEl.addEventListener('click', () => {
+            Data2Serv.gender = 1
+            Render_avatar(repaint_avatar(Data2Serv), 0);
+            console.log('woman');
+        })
+
+        linkPersonal.addEventListener('click', () => {
+            init(4)
+        })
+
+        checkAgreeEl.addEventListener('change', () => {
+            if (checkAgreeEl.checked) {
+                Data2Serv.agreeChecked = true
+                console.log('Согласие получено');
+            } else {
+                Data2Serv.agreeChecked = false
+                console.log('Согласие отозвано');
+            }
+        })        
+
+        logoutEl.addEventListener('click', () => {
+
+            removeToken()
+            init(0)           
+             console.log('exit')
+        })
+
+        rangeEarsInput.addEventListener('input', () => {
+                Data2Serv.ear = rangeEarsInput.value - 1;
+                EarsValEl.textContent = Data2Serv.ear + 1;
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+
+        rangeDressInput.addEventListener('input', () => {
+                Data2Serv.dress = rangeDressInput.value - 1;
+                DressValEl.textContent = Data2Serv.dress + 1
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+            
+        rangeChinInput.addEventListener('input', () => {
+                Data2Serv.chin = rangeChinInput.value - 1;
+                ChinValEl.textContent = Data2Serv.chin + 1
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+            
+        rangeMouthInput.addEventListener('input', () => {
+                Data2Serv.mouth = rangeMouthInput.value - 1;
+                MouthValEl.textContent = Data2Serv.mouth + 1
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+            
+        rangeEyeInput.addEventListener('input', () => {
+                Data2Serv.eye = rangeEyeInput.value - 1;
+                EyeValEl.textContent = Data2Serv.eye + 1
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+            
+        rangeNoseInput.addEventListener('input', () => {
+                Data2Serv.nose = rangeNoseInput.value - 1;
+                NoseValEl.textContent = Data2Serv.nose + 1
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+            
+        rangeHairInput.addEventListener('input', () => {
+                Data2Serv.hair = rangeHairInput.value - 1;
+                HairValEl.textContent = Data2Serv.hair + 1
+                Render_avatar(repaint_avatar(Data2Serv), 1);
+            });
+        renderTable();        
+    
 })    
 
 const handleRegSubmit = (e) => {
@@ -279,9 +309,21 @@ const handleRegSubmit = (e) => {
     registerUser(Data2Serv, passwordFieldEl.value)    
 }
 
-const handleLoginSubmit = (e) => {
+const handleLoginSubmit = async (e) => {
     e.preventDefault()
-    loginUser()
+    const loginEl = document.querySelector('#login_auth')
+    const passEl = document.querySelector('#pass_auth')
+    
+    const result = await loginUser(loginEl.value, passEl.value)
+    
+    // Проверяем, успешно ли всё
+    if (result && result.token) {
+        console.log('✅ Всё ок!');
+        init(5); // Переход в основное приложение
+    } else {
+        console.log('❌ Ошибка входа');
+        alert('Неверный логин или пароль');
+    }
 }
 
 regFormEl.addEventListener("submit", handleRegSubmit);

@@ -6,12 +6,12 @@ export async function registerUser(regData, pswrd) {
         password: pswrd,      
         nik_name: regData.nikname,      // минимум 3 символа
         gender: regData.gender,                       // 0, 1 или 2
-        avatars: [regData.ear, regData.skin, regData.chin, regData.mouth, regData.eye, regData.nose, regData.hair], 
+        avatars: [regData.ear, regData.dress, regData.chin, regData.mouth, regData.eye, regData.nose, regData.hair], 
     };
 
     // Детальная отладка
-    console.log('📤 Отправляем JSON:', JSON.stringify(userData, null, 2))
-    console.log('📤 Типы полей:');
+    console.log('  Отправляем JSON:', JSON.stringify(userData, null, 2))
+    console.log('  Типы полей:');
     console.log('  login:', typeof userData.login, userData.login);
     console.log('  password:', typeof userData.password, userData.password);
     console.log('  nik_name:', typeof userData.nikname, userData.nikname);
@@ -56,12 +56,17 @@ export async function registerUser(regData, pswrd) {
     }
 }
 
-export async function loginUser() {
-    const loginData = {
-        login: "testuser123",
-        password: "password123"
-    };
+export async function loginUser(login_, pass_) {
+    console.log('тут');
 
+    console.log(login_);
+    console.log(pass_);    
+    const loginData = {
+        login: login_, 
+        password: pass_
+    };
+    console.log(loginData.login);
+    console.log(loginData.password);
     try {
         const response = await fetch(`${server_url}/log-in`, {
             method: 'POST',
@@ -83,10 +88,10 @@ export async function loginUser() {
         // Сохраняем токен
         localStorage.setItem('authToken', result.token);
 
-        document.getElementById('result').innerHTML = `
-            <strong>Вход выполнен!</strong><br>
-            Токен получен и сохранён
-        `;
+        // document.getElementById('result').innerHTML = `
+        //     <strong>Вход выполнен!</strong><br>
+        //     Токен получен и сохранён
+        // `;
 
         return result;
 
@@ -96,4 +101,62 @@ export async function loginUser() {
             <span style="color:red;">Ошибка: ${error.message}</span>
         `;
     }
+}
+
+// Функция для авторизованных запросов
+export async function authorizedFetch(url, options = {}) {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('Нет токена авторизации');
+    }
+
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        ...options.headers
+    };
+
+    const response = await fetch(`${server_url}${url}`, {
+        ...options,
+        headers
+    });
+
+    if (response.status === 401) {
+        // Токен недействителен - удаляем
+        removeToken();
+        throw new Error('Сессия истекла, войдите заново');
+    }
+
+    return response;
+}
+
+
+// me
+export async function loadUserProfile() {
+    if (!getToken()) {
+        console.log('Пользователь не авторизован');
+        return;
+    }
+    
+    try {
+        const response = await authorizedFetch('/me');
+        const userData = await response.json();
+        console.log('Данные пользователя:', userData);
+        return userData;
+    } catch (error) {
+        console.error('Ошибка загрузки профиля:', error);
+    }
+}
+
+// Получение токена
+export function getToken() {
+    return localStorage.getItem('authToken');
+}
+
+// Удаление токена (выход)
+export function removeToken() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('tokenTimestamp');
+    console.log('🔓 Токен удалён');
 }
