@@ -157,12 +157,12 @@ addEventListener('DOMContentLoaded', async () => {
     const NoseValEl = document.querySelector('.avatar-custom--nose .avatar-custom__value');
     const HairValEl = document.querySelector('.avatar-custom--hair .avatar-custom__value');          
 
-    // console.log(getToken())
     const userProfile = await loadUserProfile()
     if (userProfile) {
         init(5) 
         console.log('===>>> ' + userProfile.nik_name)
     } else { init(0); }
+    // } else { init(5); }
 
         butRegEl.addEventListener('click', () => {
             init(1)

@@ -20,7 +20,8 @@ body {
 
 main {
   flex-grow: 1;
-  padding: 76px 0 0;
+  padding: 26px 0 0;
+  /* height: 100%; */
 }
 
 img {

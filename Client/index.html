@@ -31,15 +31,11 @@
     <section class="welcome-page">
       <h1 class="visually-hidden" aria-hidden="false">Регистрация&nbsp;&mdash; мессенджера</h1>
       <div class="container">
-        <div class="debug">
-          <h2 class="debug__header no-user">DEBUG:</h2>
-          <p class="debug__message">-</p>
-        </div>
         <!-- стартовая карточка -->
         <div class="wrapper-owner no-user">
           <div class="card wrapper-start">
             <form class="registration-form" action="#" method="POST">
-              <h2 class="registration-form__name">Какой то крутой мессенджер</h2>
+              <h2 class="registration-form__name">Какой то мессенджер</h2>
               <div class="registration-form__wrapper">
                 <img class="no-user" src="images/logo.svg" alt="" width="500">
               </div>
@@ -171,7 +167,7 @@
                     </div>
 
                     <div class="avatar-custom avatar-custom--chin">
-                      <p class="avatar-custom__text">Подбородок</p>
+                      <p class="avatar-custom__text">Усы / брода</p>
                       <input class="avatar-custom__range" type="range" min="1" max="5" step="1" value="0">
                       <p class="avatar-custom__value">1</p>
                     </div>
@@ -298,19 +294,22 @@
 
 
           <!-- основное приложение -->
-          <div class="card wrapper-app-main">
-            <!-- <div class="card__double">
-              <div class="card__triple"> -->
-                <div class="wrapper-personal-data__registration">
-                  <form class="registration-form" action="#" method="POST">
-                    <h2 class="registration-form__name registration-form__name--header">основная прога</h2>
-                      <p>sxczxvcxzvzxcvz</p>
-                      <button class="registration-form__btn btn registration-form__btn--logout" type="button">Logout</button>
-
-                  </form>
-                </div>
-              <!-- </div>
-            </div> -->
+          <div class="app wrapper-app-main">
+           
+            <nav class="app__nav">
+              <ul class="app__nav-ul">
+                <li><button class="app__nav-btn btn">1</button>  </li>
+                <li><button class="app__nav-btn btn">2</button></li>
+                <li><button class="app__nav-btn btn">3</button></li>
+                <li><button class="app__nav-btn btn">4</button></li>
+                <li><button class="app__nav-btn btn registration-form__btn registration-form__btn--logout">exit</button></li>
+              </ul>
+               <!-- <button class="registration-form__btn btn registration-form__btn--logout" type="button">Logout</button> -->
+            </nav>
+            <div class="app__chat-list">
+              <p>chats</p>
+            </div>
+            <div class="app__content">contents messages</div>
           </div>        
 
         </div>
@@ -331,6 +330,7 @@
             <span class="header__desc">Топ месенджер для топ клиентов</span>
           </div>
         </div>
+        
       </div>
     </div>
   </footer>

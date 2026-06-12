@@ -1,0 +1,51 @@
+.app {
+    display: flex;
+    width: 100%;
+    height: 80vh;
+    flex: 1;
+    padding: 10px;
+    background-color: rgb(80, 80, 80); 
+    /* border: 1px solid blue; */
+    border-radius: 15px;
+    gap: 10px;
+}
+
+.app__nav,
+.app__chat-list,
+.app__content {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid blue; */
+    border-radius: 15px;
+    padding: 10px;  
+    background-color: rgb(124, 124, 124); 
+}
+
+.app__nav-ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    gap: 10px;
+}
+
+.app__nav-btn {
+    width: 50px;
+    border-radius: 15px;
+    background-color: black;
+}
+
+.app__nav-btn:hover {
+    background-color: rgb(73, 92, 75);
+}
+
+.app__chat-list {
+    width: 300px;
+}
+
+.app__content {
+    width: 100%;
+    /* border: 1px solid blue; */
+    border-radius: 15px;
+    padding: 10px;
+}
