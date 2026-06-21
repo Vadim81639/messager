@@ -1,0 +1,10 @@
+.iframe-agree {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #817e7073;
+}
+
+.text-agree {
+    color: #817e70;
+}

@@ -57,8 +57,9 @@
 }
 
 .personal-box {
+    display: flex;
     overflow-y: auto; 
     transform: translateZ(0); 
     scrollbar-color: #858585 #e9e8e0;
+    height: 900px;
 }
-

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>messager-app</title>
+    <script type="module" src="./scripts/application.js"></script>
+</head>
+<body>
+    <div class="app">жопа</div>
+          <!-- основное приложение -->
+          <div class="app wrapper-app-main">
+            <nav class="app__nav">
+              <ul class="app__nav-ul">
+                <li>
+                  <button class="app__nav-btn btn">
+                    <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                      <use xlink:href="images/generals.svg#icon-profile"></use>
+                    </svg>
+                  </button>
+                </li>
+                <li>
+                  <button class="app__nav-btn btn">
+                    <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                      <use xlink:href="images/generals.svg#icon-chat"></use>
+                    </svg>
+                  </button>
+                </li>
+                <li>
+                  <button class="app__nav-btn btn">
+                    <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                      <use xlink:href="images/generals.svg#icon-setting"></use>
+                    </svg>
+                  </button>
+                </li>                
+              </ul>
+              <button class="registration-form__btn btn registration-form__btn--logout" type="button">Logout</button>
+            </nav>
+            <div class="app__chat-list">
+              <p>chats</p>
+            </div>
+            <div class="app__content">contents messages</div>
+          </div>    
+</body>
+</html>
