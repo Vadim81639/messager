@@ -38,16 +38,16 @@
         const eyeEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
         const noseEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
         const hairEl = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-        bodyEl.setAttribute('href',repaint.body)
-        headEl.setAttribute('href',repaint.head)    
-        dressEl.setAttribute('href',repaint.dress)  
+        bodyEl.setAttribute('href', repaint.body)
+        headEl.setAttribute('href', repaint.head)    
+        dressEl.setAttribute('href', repaint.dress)  
         backimgEl.setAttribute('href', 'images/avatar_img/sprite_avatar_other.svg#backimage1')
-        earEl.setAttribute('href',repaint.ear)
-        chinEl.setAttribute('href',repaint.chin)
-        mouthEl.setAttribute('href',repaint.mouth)
-        eyeEl.setAttribute('href',repaint.eye)
-        noseEl.setAttribute('href',repaint.nose)
-        hairEl.setAttribute('href',repaint.hair)
+        earEl.setAttribute('href', repaint.ear)
+        chinEl.setAttribute('href', repaint.chin)
+        mouthEl.setAttribute('href', repaint.mouth)
+        eyeEl.setAttribute('href', repaint.eye)
+        noseEl.setAttribute('href', repaint.nose)
+        hairEl.setAttribute('href', repaint.hair)
         svgEl.appendChild(backimgEl)
         svgEl.appendChild(bodyEl)
         svgEl.appendChild(dressEl)    
@@ -67,74 +67,64 @@
     const loginWinEl = document.querySelector('.wrapper-login');
     const noteWinEl = document.querySelector('.wrapper-note');
     const personalEl = document.querySelector('.wrapper-personal-data')
-    // const appEl = document.querySelector('.wrapper-app-main')
     switch (page) {
-        case 0 : {
-            startWinEl.style.display = 'flex';
-            registrationWinEl.style.display = 'none';
-            loginWinEl.style.display = 'none';
-            noteWinEl.style.display = 'none';
-            personalEl.style.display = 'none';
-            // window.location.href = "index.html"
-            // appEl.style.display = 'none';
-            break;
+            case 0 : {
+                startWinEl.style.display = 'flex';
+                registrationWinEl.style.display = 'none';
+                loginWinEl.style.display = 'none';
+                noteWinEl.style.display = 'none';
+                personalEl.style.display = 'none';
+                break;
+            }
+            case 1 : {
+                startWinEl.style.display = 'none';
+                registrationWinEl.style.display = 'flex';
+                loginWinEl.style.display = 'none';
+                noteWinEl.style.display = 'none';  
+                personalEl.style.display = 'none';
+                Render_avatar(repaint_avatar(Data2Serv), 0); 
+                break;
+            }
+            case 2 : {
+                startWinEl.style.display = 'none';
+                registrationWinEl.style.display = 'none';
+                loginWinEl.style.display = 'flex';
+                noteWinEl.style.display = 'none';  
+                personalEl.style.display = 'none';
+                break;
+            }                
+            case 3 : { 
+                startWinEl.style.display = 'none';
+                registrationWinEl.style.display = 'none';
+                loginWinEl.style.display = 'none';
+                noteWinEl.style.display = 'flex'; 
+                personalEl.style.display = 'none';   
+                Render_avatar(repaint_avatar(Data2Serv), 1);     
+                break;
+            }       
+            case 4 : { 
+                startWinEl.style.display = 'none';
+                registrationWinEl.style.display = 'none';
+                loginWinEl.style.display = 'none';
+                noteWinEl.style.display = 'none'; 
+                personalEl.style.display = 'flex';   
+                break;
+            }       
+            case 5 : {
+                startWinEl.style.display = 'none';
+                registrationWinEl.style.display = 'none';
+                loginWinEl.style.display = 'none';
+                noteWinEl.style.display = 'none'; 
+                personalEl.style.display = 'none';   
+                window.location.href = "app_page.html"
+                console.log('autorizations');
+                break;
+            }
         }
-        case 1 : {
-            startWinEl.style.display = 'none';
-            registrationWinEl.style.display = 'flex';
-            loginWinEl.style.display = 'none';
-            noteWinEl.style.display = 'none';  
-            personalEl.style.display = 'none';
-            // appEl.style.display = 'none';
-            Render_avatar(repaint_avatar(Data2Serv), 0); 
-            break;
-        }
-        case 2 : {
-            startWinEl.style.display = 'none';
-            registrationWinEl.style.display = 'none';
-            loginWinEl.style.display = 'flex';
-            noteWinEl.style.display = 'none';  
-            personalEl.style.display = 'none';
-            // appEl.style.display = 'none';
-            break;
-        }                
-        case 3 : { 
-            startWinEl.style.display = 'none';
-            registrationWinEl.style.display = 'none';
-            loginWinEl.style.display = 'none';
-            noteWinEl.style.display = 'flex'; 
-            personalEl.style.display = 'none';   
-            // appEl.style.display = 'none';
-            Render_avatar(repaint_avatar(Data2Serv), 1);     
-            break;
-        }       
-        case 4 : { 
-            startWinEl.style.display = 'none';
-            registrationWinEl.style.display = 'none';
-            loginWinEl.style.display = 'none';
-            noteWinEl.style.display = 'none'; 
-            personalEl.style.display = 'flex';   
-            // appEl.style.display = 'none';
-            break;
-        }       
-        case 5 : {
-            startWinEl.style.display = 'none';
-            registrationWinEl.style.display = 'none';
-            loginWinEl.style.display = 'none';
-            noteWinEl.style.display = 'none'; 
-            personalEl.style.display = 'none';   
-            // appEl.style.display = 'flex';
-            window.location.href = "app_page.html"
-            console.log('autorizations');
-            break
-        }
-    }
     }
 
     addEventListener('DOMContentLoaded', async () => {
         // кнопки
-        showMsg('msg head','msg text',1);
-
         const butLoginEl = document.querySelector('.registration-form__btn--login');
         const butRegEl = document.querySelector('.registration-form__btn--reg');    
         const butBackEls = document.querySelectorAll('.btn__data-back');
@@ -144,7 +134,6 @@
         const radioWomanEl = document.querySelector('.custom-radio__field--female')   
         const linkPersonal = document.querySelector('.custom-checkbox__label-link--personal-data')
         const checkAgreeEl = document.querySelector('.custom-checkbox__field--agree')
-        // const logoutEl = document.querySelector('.registration-form__btn--logout')
         // регуляторы аватарки
         const rangeEarsInput = document.querySelector('.avatar-custom--ears .avatar-custom__range');    
         const rangeDressInput = document.querySelector('.avatar-custom--dress .avatar-custom__range');
@@ -161,7 +150,6 @@
         const EyeValEl = document.querySelector('.avatar-custom--eye .avatar-custom__value');
         const NoseValEl = document.querySelector('.avatar-custom--nose .avatar-custom__value');
         const HairValEl = document.querySelector('.avatar-custom--hair .avatar-custom__value');          
-
         const avatar_generate = () => {
         Data2Serv.ear = generateNum(5)
         Data2Serv.chin = generateNum(5)
@@ -186,7 +174,7 @@
         HairValEl.textContent = Data2Serv.hair + 1
         Render_avatar(repaint_avatar(Data2Serv), 1);
         }
-    
+        // showMsg('Ошибка сервера','Нет связи с сервером',0,'');
         const userProfile = await loadUserProfile()
         if (userProfile) {
             init(5) 

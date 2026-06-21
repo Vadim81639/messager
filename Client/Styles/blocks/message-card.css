@@ -46,27 +46,23 @@
 .message-card__head {
     color: rgb(255, 255, 255);
     text-align: center;
-    /* border: 1px solid red; */
     background-color: rgb(66, 66, 66);
     padding: 10px;
-    
     white-space: nowrap;
-    /* border-radius: 10px; */
 }
 
 .message-card__content {
     display: flex;
     flex-direction: row;
-    /* border: 1px solid blue; */
     flex: 1;
     padding: 10px;
     gap: 10px;
 }
 
 .message-card__img {
-    /* border: 1px solid rgb(255, 0, 13); */
     width: 100px;
     height: 100px;
+    margin-left: 20px;
 }
 
 .message-card__text {
@@ -76,14 +72,23 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid blue; */
+}
+
+.message-card__msgBtnWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 20px;
+    margin: auto 20px 20px 20px;
 }
 
 .message-card__button {
     background-color: dimgrey;
     margin-top: auto;
-    width: calc(var(--message-card-width) - var(--pad) * 2);
-    margin: auto var(--pad) 20px var(--pad);
+    min-width: 120px;
+    flex: 1;
+    /* width: calc(var(--message-card-width) - var(--pad) * 2); */
+    width: auto;
 }
 
 .message-card__button:hover {
