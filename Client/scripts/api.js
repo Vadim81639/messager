@@ -1,22 +1,15 @@
-const server_url = 'http://127.0.0.1:8000'
+const server_url = 'http://127.0.0.1:8000';
 
 export async function registerUser(regData, pswrd) {
     const userData = {
-        login: regData.login, 
-        password: pswrd,      
-        nik_name: regData.nikname,      // минимум 3 символа
-        gender: regData.gender,                       // 0, 1 или 2
-        avatars: [regData.ear, regData.dress, regData.chin, regData.mouth, regData.eye, regData.nose, regData.hair], 
+        login: regData.login,
+        password: pswrd,
+        nik_name: regData.nikname,
+        gender: regData.gender,
+        avatars: [regData.ear, regData.dress, regData.chin, regData.mouth, regData.eye, regData.nose, regData.hair],
     };
 
-    // Детальная отладка
-    console.log('  Отправляем JSON:', JSON.stringify(userData, null, 2))
-    console.log('  Типы полей:');
-    console.log('  login:', typeof userData.login, userData.login);
-    console.log('  password:', typeof userData.password, userData.password);
-    console.log('  nik_name:', typeof userData.nikname, userData.nikname);
-    console.log('  gender:', typeof userData.gender, userData.gender);
-    console.log('  avatars:', userData.avatars, 'длина:', userData.avatars.length);
+    console.log('📤 Отправляем:', JSON.stringify(userData, null, 2));
 
     try {
         const response = await fetch(`${server_url}/new-reg`, {
@@ -28,45 +21,45 @@ export async function registerUser(regData, pswrd) {
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || `Ошибка: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            // ✅ Возвращаем объект с ошибкой, а не выбрасываем
+            return {
+                success: false,
+                error: errorData.detail || `Ошибка: ${response.status}`,
+                status: response.status
+            };
         }
 
         const result = await response.json();
-        console.log('✅ Пользователь успешно зарегистрирован:', result);
+        console.log('✅ Регистрация успешна:', result);
         
-        // Вывод на страницу (если есть элемент с id="result")
-        const resultElement = document.getElementById('result');
-        if (resultElement) {
-            resultElement.innerHTML = `
-                <strong>Регистрация прошла успешно!</strong><br>
-                ID пользователя: ${result.id}
-            `;
-        }
-
-        return result;
+        // ✅ Возвращаем успех
+        return {
+            success: true,
+            data: result
+        };
 
     } catch (error) {
         console.error('❌ Ошибка регистрации:', error);
         
-        const resultElement = document.getElementById('result');
-        if (resultElement) {
-            resultElement.innerHTML = `<span style="color:red;">Ошибка: ${error.message}</span>`;
-        }
+        // ✅ Возвращаем объект с ошибкой
+        return {
+            status: 404,
+            success: false,
+            error: error.message || 'Сервер недоступен. Проверьте подключение.',
+            networkError: true
+        };
     }
 }
 
 export async function loginUser(login_, pass_) {
-    console.log('тут');
-
-    console.log(login_);
-    console.log(pass_);    
+    console.log('🔐 Попытка входа:', login_);
+    
     const loginData = {
-        login: login_, 
+        login: login_,
         password: pass_
     };
-    console.log(loginData.login);
-    console.log(loginData.password);
+    
     try {
         const response = await fetch(`${server_url}/log-in`, {
             method: 'POST',
@@ -78,32 +71,41 @@ export async function loginUser(login_, pass_) {
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.detail || `Ошибка: ${response.status}`);
+            // ✅ Возвращаем объект с ошибкой
+            return {
+                success: false,
+                error: errorData.detail || `Ошибка: ${response.status}`,
+                status: response.status
+            };
         }
 
         const result = await response.json();
-        
-        console.log('✅ Успешный вход:', result);
+        console.log('✅ Вход успешен:', result);
 
         // Сохраняем токен
-        localStorage.setItem('authToken', result.token);
+        if (result.token) {
+            localStorage.setItem('authToken', result.token);
+        }
 
-        // document.getElementById('result').innerHTML = `
-        //     <strong>Вход выполнен!</strong><br>
-        //     Токен получен и сохранён
-        // `;
-
-        return result;
+        // ✅ Возвращаем успех
+        return {
+            success: true,
+            token: result.token,
+            user: result.user || null
+        };
 
     } catch (error) {
         console.error('❌ Ошибка входа:', error);
-        document.getElementById('result').innerHTML = `
-            <span style="color:red;">Ошибка: ${error.message}</span>
-        `;
+        
+        // ✅ Возвращаем объект с ошибкой
+        return {
+            success: false,
+            error: error.message || 'Сервер недоступен. Проверьте подключение.',
+            networkError: true
+        };
     }
 }
 
-// Функция для авторизованных запросов
 export async function authorizedFetch(url, options = {}) {
     const token = getToken();
     
@@ -123,7 +125,6 @@ export async function authorizedFetch(url, options = {}) {
     });
 
     if (response.status === 401) {
-        // Токен недействителен - удаляем
         removeToken();
         throw new Error('Сессия истекла, войдите заново');
     }
@@ -131,30 +132,36 @@ export async function authorizedFetch(url, options = {}) {
     return response;
 }
 
-
-// me
 export async function loadUserProfile() {
-    if (!getToken()) {
-        console.log('Пользователь не авторизован');
-        return;
+    const token = getToken();
+    
+    if (!token) {
+        console.log('🔴 Пользователь не авторизован');
+        return null; // ✅ Возвращаем null, а не undefined
     }
     
     try {
         const response = await authorizedFetch('/me');
+        
+        if (!response.ok) {
+            console.error('❌ Ошибка загрузки профиля:', response.status);
+            return null;
+        }
+        
         const userData = await response.json();
-        console.log('Данные пользователя:', userData);
+        console.log('👤 Данные пользователя:', userData);
         return userData;
+        
     } catch (error) {
-        console.error('Ошибка загрузки профиля:', error);
+        console.error('❌ Ошибка загрузки профиля:', error);
+        return null; // ✅ Возвращаем null при ошибке
     }
 }
 
-// Получение токена
 export function getToken() {
     return localStorage.getItem('authToken');
 }
 
-// Удаление токена (выход)
 export function removeToken() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('tokenTimestamp');

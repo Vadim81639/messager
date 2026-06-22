@@ -192,7 +192,7 @@
         butBackEls.forEach(button => {
             button.addEventListener('click', () => {
                 if (button.classList.contains('btn__data-back-reg')) {
-                init(1);
+                    init(1);
                 }
                 else {
                     init(0)                
@@ -276,10 +276,9 @@
                 Render_avatar(repaint_avatar(Data2Serv), 1);
             });
         renderTable();        
-    
     })    
 
-    const handleRegSubmit = (e) => {
+    const handleRegSubmit = async (e) => {
         e.preventDefault()
         const nicknameFieldEl = document.querySelector('#_nik-name')
         const loginFieldEl = document.querySelector('#_login')
@@ -287,32 +286,60 @@
         const confirm_passwordFieldEl = document.querySelector('#confirm_password')
         if (passwordFieldEl.value !== confirm_passwordFieldEl.value) {
             console.log('пароли не совпадают');
+            showMsg('Ошибка регистрации', 'Пароли не совпадают', 2)
             return
         } else 
             console.log('пароли совпадают');
 
-        if (!Data2Serv.agreeChecked) return console.log('нет подписи согласия на обработку данных')
+        if (!Data2Serv.agreeChecked) 
+            {   showMsg('Ошибка регистрации', 'нет подписи согласия на обработку данных',2)
+                console.log('нет подписи согласия на обработку данных')
+                return 
+            }
         Data2Serv.nikname = nicknameFieldEl.value
         Data2Serv.login = loginFieldEl.value
         console.log(Data2Serv.nikname);
-        registerUser(Data2Serv, passwordFieldEl.value)    
+        const result = await registerUser(Data2Serv, passwordFieldEl.value);
+        if (result.status==409) {
+                showMsg('Ошибка регистрации', 'Такой пользователь уже существует',2)
+                return
+            }
+        if (result.status==404) {
+            showMsg('Ошибка соединения', 'Нет связи с сервером', 3)        
+            }
+            else {
+                const msgReturn = await showMsg('Успех', 'Зареган', 0)
+                    console.log('reg - ' + msgReturn.status);
+
+                if (msgReturn == 0) {
+                    console.log(msgReturn.status);
+                    init(2)
+                    }
+                console.log(msgReturn);
+            }
     }
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
         const loginEl = document.querySelector('#login_auth')
         const passEl = document.querySelector('#pass_auth')
-        
         const result = await loginUser(loginEl.value, passEl.value)
+        // if (!result.networkError)
         
+
         // Проверяем, успешно ли всё
         if (result && result.token) {
             console.log('✅ Всё ок!');
             init(5); // Переход в основное приложение
         } else {
+            if (result.status==401) showMsg('Ошибка связи', 'Login i pass',3) 
+                else {
+                    showMsg('Ошибка связи', 'нет связи с сервером, проверьте соединение',3)
+                }
             console.log('❌ Ошибка входа');
-            alert('Неверный логин или пароль');
+            // alert('Неверный логин или пароль');
         }
+        console.log('>>>= ', result);
     }
 
     regFormEl.addEventListener("submit", handleRegSubmit);
