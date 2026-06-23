@@ -1,7 +1,7 @@
 :root {
     --message-card-width: 500px;
     --message-card-height: 300px;
-    --pad : 100px;
+
 }
 
 .message-card {
@@ -87,7 +87,6 @@
     margin-top: auto;
     min-width: 120px;
     flex: 1;
-    /* width: calc(var(--message-card-width) - var(--pad) * 2); */
     width: auto;
 }
 

@@ -150,7 +150,7 @@
         const EyeValEl = document.querySelector('.avatar-custom--eye .avatar-custom__value');
         const NoseValEl = document.querySelector('.avatar-custom--nose .avatar-custom__value');
         const HairValEl = document.querySelector('.avatar-custom--hair .avatar-custom__value');          
-        const avatar_generate = () => {
+        var avatar_generate = () => {
         Data2Serv.ear = generateNum(5)
         Data2Serv.chin = generateNum(5)
         Data2Serv.eye = generateNum(5)
@@ -174,7 +174,6 @@
         HairValEl.textContent = Data2Serv.hair + 1
         Render_avatar(repaint_avatar(Data2Serv), 1);
         }
-        // showMsg('Ошибка сервера','Нет связи с сервером',0,'');
         const userProfile = await loadUserProfile()
         if (userProfile) {
             init(5) 
@@ -182,6 +181,7 @@
         } else {avatar_generate(); init(0); }
         
         butRegEl.addEventListener('click', () => {
+            avatar_generate()
             init(1)
         })
 
@@ -309,11 +309,11 @@
             }
             else {
                 const msgReturn = await showMsg('Успех', 'Зареган', 0)
-                    console.log('reg - ' + msgReturn.status);
-
+                regFormEl.reset() 
+                console.log('reg - ' + msgReturn.status);
                 if (msgReturn == 0) {
                     console.log(msgReturn.status);
-                    init(2)
+                     init(2)
                     }
                 console.log(msgReturn);
             }
@@ -324,10 +324,7 @@
         const loginEl = document.querySelector('#login_auth')
         const passEl = document.querySelector('#pass_auth')
         const result = await loginUser(loginEl.value, passEl.value)
-        // if (!result.networkError)
-        
 
-        // Проверяем, успешно ли всё
         if (result && result.token) {
             console.log('✅ Всё ок!');
             init(5); // Переход в основное приложение
@@ -337,7 +334,6 @@
                     showMsg('Ошибка связи', 'нет связи с сервером, проверьте соединение',3)
                 }
             console.log('❌ Ошибка входа');
-            // alert('Неверный логин или пароль');
         }
         console.log('>>>= ', result);
     }

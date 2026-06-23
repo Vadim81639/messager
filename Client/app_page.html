@@ -1,46 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>messager-app</title>
-    <link rel="stylesheet" href="Styles/styles.css">
-    <script type="module" src="./scripts/application.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>messager-app</title>
+  <link rel="stylesheet" href="Styles/styles.css">
+  <script type="module" src="./scripts/application.js"></script>
 </head>
+
 <body>
-    <!-- <div class="app">жопа</div> -->
-          <!-- основное приложение -->
-          <div class="app wrapper-app-main">
-            <nav class="app__nav">
-              <ul class="app__nav-ul">
-                <li>
-                  <button class="app__nav-btn btn">
-                    <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
-                      <use xlink:href="images/generals.svg#icon-profile"></use>
-                    </svg>
-                  </button>
-                </li>
-                <li>
-                  <button class="app__nav-btn btn">
-                    <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
-                      <use xlink:href="images/generals.svg#icon-chat"></use>
-                    </svg>
-                  </button>
-                </li>
-                <li>
-                  <button class="app__nav-btn btn">
-                    <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
-                      <use xlink:href="images/generals.svg#icon-setting"></use>
-                    </svg>
-                  </button>
-                </li>                
-              </ul>
-              <button class="registration-form__btn btn registration-form__btn--logout" type="button">Logout</button>
-            </nav>
-            <div class="app__chat-list">
-              <p>chats</p>
-            </div>
-            <div class="app__content">contents messages</div>
-          </div>    
+  <!-- основное приложение -->
+  <div class="app wrapper-app-main">
+    <nav class="app__nav">
+      <ul class="app__nav-ul">
+        <li>
+          <button class="app__nav-btn btn btn__profile">
+            <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="images/generals.svg#icon-profile"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="app__nav-btn btn">
+            <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="images/generals.svg#icon-chat"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="app__nav-btn btn">
+            <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+              <use xlink:href="images/generals.svg#icon-setting"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+      <button class="registration-form__btn btn registration-form__btn--logout" type="button">Logout</button>
+    </nav>
+    <div class="app__chat-list">
+      <p>chats</p>
+    </div>
+    <div class="app__content">contents messages</div>
+  </div>
+
+  <div class="profile">
+    <div class="profile__box">
+      <div class="item item--head">
+        <p>Ваш id: #123231</p>
+      </div>
+      <div class="item item--ava">
+        <!-- avatar -->
+         <div class="profile__ava"></div>
+      </div>
+      <div class="item item--meta">
+        <table class="profile-table">
+          <caption class="no-user">Мета-данные</caption>
+          <tr>
+            <td class="label no-user">День рождения:</td>
+            <td class="value">06.12.1981</td>
+          </tr>
+          <tr>
+            <td class="label no-user">Дата регистрации:</td>
+            <td class="value">24.05.2026</td>
+          </tr>
+          <tr>
+            <td class="label no-user">Страна:</td>
+            <td class="value">Россия</td>
+          </tr>
+          <tr>
+            <td class="label no-user">Город:</td>
+            <td class="value">Самара</td>
+          </tr>
+          <tr>
+            <td class="label no-user">показывать мета-данные:</td>
+            <td class="value"><input type="checkbox"></td>
+          </tr>          
+        </table>        
+
+      </div>
+      <div class="item item--publicData">
+        <table class="profile-table">
+          <caption class="no-user">Профиль пользователя</caption>
+          <tr>
+            <td class="label no-user">Ник:</td>
+            <td class="value">Василь</td>
+            <td> <button>fddfs</button></td>
+          </tr>
+          <tr>
+            <td class="label no-user">Пол:</td>
+            <td class="value">Мужской</td>
+          </tr>
+          <tr>
+            <td class="label no-user">Роль:</td>
+            <td class="value">Пользователь</td>
+          </tr>
+          <tr>
+            <td class="label no-user">Статус:</td>
+            <td class="value">hello world</td>
+          </tr>
+        </table>
+      </div>
+      <div class="item item--btnPanel">
+        <button>ок</button>
+      </div>
+                    <button class="btn__data-back btn__data-back-reg" type="button">
+                      <svg class="btn__data-icon" width="20" height="20" aria-hidden="true">
+                        <use xlink:href="images/sprite.svg#icon-close"></use>
+                      </svg>
+                    </button>      
+    </div>
+  </div>
 </body>
+
 </html>

@@ -1,0 +1,60 @@
+:root {
+    --message-profile-width: 1000px;
+    --message-profile-height: 700px;
+}
+
+.profile {
+    display: none;
+    position: absolute;
+    background-color: rgba(68, 68, 68, 0.411);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    width: 100%;
+    height: 100%;
+}
+
+.profile__box {
+    position: absolute;
+    display: grid;
+    padding: 20px;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 50px 300px 1fr 50px;
+    /* overflow: hidden; */
+    flex-direction: column;
+    width: var(--message-profile-width);
+    min-height: var(--message-profile-height);
+    height: auto;
+    background-color: rgb(141, 141, 141);
+    left: calc(50% - var(--message-profile-width)/2);
+    top: calc(50% - var(--message-profile-height)/2);
+    border-radius: 15px;
+    gap: 10px;
+    box-shadow: -1px -1px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease; 
+    width: 1000px;
+    top: calc(50% - var(--message-profile-height)/1.5);
+}
+
+.item {
+    border: 1px solid blue;
+}
+
+.item--meta {
+ grid-row: span 2;
+ 
+}
+
+.item--head {
+    grid-column: span 2;
+}
+
+.item--btnPanel {
+    grid-column: span 2;
+}
+
+.profile__ava {
+    display: flex;
+    border: 1px solid red;
+    height: 100%;
+}
+
